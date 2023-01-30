@@ -28,16 +28,18 @@ public class AdvanceMathTest {
     @Test
     public  void test2(){
         when(basicMath.addition(75.0,25.0)).thenReturn(100.0);
+        when(basicMath.multiplication(100,5)).thenReturn(500.0);
 
         Assert.assertEquals(advanceMath.multiplyBySum5(75.0,25.0),500.0,0);
     }
     @Test
     public void test3(){
         when(basicMath.addition(20.0,20.0)).thenReturn(40.0);
+        when(basicMath.addition(20.0,20.0)).thenReturn(40.0);
 
-        for(int numberOfLoop=1;numberOfLoop<=2;numberOfLoop++){
-            advanceMath.squareOfSum(20.0,20.0);
-        }
+
+        advanceMath.squareOfSum(20.0,20.0);
+
         verify(basicMath,atLeast(2)).addition(20.0,20.0);
         verify(basicMath,times(2)).addition(20.0,20.0);
     }
@@ -66,6 +68,7 @@ public class AdvanceMathTest {
     public void test5_2(){
         //given
         given(basicMath.addition(75.0,25.0)).willReturn(100.0);
+        given(basicMath.multiplication(100,5)).willReturn(500.0);
         //when
         double result2=advanceMath.multiplyBySum5(75.0,25.0);
         //then
@@ -75,11 +78,12 @@ public class AdvanceMathTest {
     public void test5_3(){
         //given
         given(basicMath.addition(20.0,20.0)).willReturn(40.0);
+        given(basicMath.addition(20.0,20.0)).willReturn(40.0);
+
         //when
-        double results=0;
-        for(int numberOfLoop=1;numberOfLoop<=2;numberOfLoop++){
-             results=advanceMath.squareOfSum(20.0,20.0);
-        }
+        double results;
+        results=advanceMath.squareOfSum(20.0,20.0);
+
         //then
         Assert.assertEquals(results,1600,0);
         verify(basicMath,atLeast(2)).addition(20.0,20.0);
